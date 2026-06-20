@@ -1,0 +1,103 @@
+# BugFlow Configuration
+# =====================
+# Master config for the multi-phase bug bounty workflow system
+
+general:
+  # How many parallel agents per phase
+  max_workers: 3
+  # Directory for all output
+  output_dir: "output"
+  # Target domain or scope file
+  target: ""
+  # Program name (for organizing output)
+  program: ""
+
+# Human-like behavior settings
+human:
+  # Min delay between requests (seconds)
+  min_delay: 2.0
+  # Max delay between requests (seconds)  
+  max_delay: 8.0
+  # Random jitter factor (0.0 - 1.0)
+  jitter: 0.3
+  # Use rotating user agents
+  rotate_ua: true
+  # Proxy list (empty = direct connection)
+  proxies: []
+  # Max requests per minute before slowing down
+  rate_limit: 15
+
+# Phase 1: Target Selection (Haddix-style)
+target_selection:
+  enabled: true
+  # Minimum bounty programs have paid out
+  min_payouts: 5
+  # Maximum scope domains to analyze
+  max_scope_domains: 50
+  # Bug bounty platforms to check
+  platforms:
+    - hackerone
+    - bugcrowd
+    - yeswehack
+    - intigriti
+
+# Phase 2: Reconnaissance (Haddix-style)
+recon:
+  enabled: true
+  # Subdomain discovery sources
+  sources:
+    - crt.sh
+    - subfinder
+    - amass
+    - wayback
+    - dnsdumpster
+  # Max subdomains to carry forward
+  max_subdomains: 500
+  # Filter out CDN/WAF subdomains
+  filter_cdn: true
+  # Screenshot live hosts
+  screenshot: false
+
+# Phase 3: Vulnerability Scanning
+scanning:
+  enabled: true
+  # Nuclei templates to use (comma-separated or "all")
+  nuclei_templates: "all"
+  # Custom template directories
+  custom_templates:
+    - ~/nuclei-templates/
+  # Scan severity filter
+  min_severity: "medium"
+  # Port scan targets
+  port_scan: false
+
+# Phase 4: API Testing (InsiderPhD-style)
+api_testing:
+  enabled: true
+  # API discovery methods
+  discover:
+    - wayback_urls
+    - js_scrape
+    - common_paths
+  # BOLA/IDOR tests
+  test_idor: true
+  # Broken auth tests
+  test_auth: true
+  # Mass assignment tests
+  test_mass_assignment: true
+  # Rate limit tests
+  test_rate_limits: true
+
+# Phase 5: Report Writing (Hermes-powered)
+reporting:
+  enabled: true
+  # Use Hermes AI for report generation
+  use_hermes: true
+  # Output format
+  format: "markdown"
+  # Include CVSS scoring
+  include_cvss: true
+  # Include remediation steps
+  include_remediation: true
+  # Auto-save report
+  auto_save: true
