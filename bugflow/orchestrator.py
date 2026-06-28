@@ -13,17 +13,13 @@ Usage:
     python3 bugflow.py --list-phases
 """
 
-import sys
 import json
 import logging
 import argparse
 from pathlib import Path
 
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-from core.utils import load_config, get_output_dir, print_banner, setup_logging, available_tools, check_tool
-from core.humanize import random_delay
+from bugflow.core.utils import load_config, get_output_dir, print_banner, setup_logging, available_tools, check_tool
+from bugflow.core.humanize import random_delay
 
 logger = logging.getLogger("bugflow")
 
@@ -68,7 +64,7 @@ class BugFlowOrchestrator:
 
         # Phase 1: Target Selection
         if self.config.get("target_selection", {}).get("enabled", True):
-            from phases.phase1_targets import TargetSelector
+            from bugflow.phases.phase1_targets import TargetSelector
             logger.info("\n" + "=" * 60)
             logger.info("PHASE 1/5: Target Selection (Haddix-style)")
             logger.info("=" * 60)
@@ -79,7 +75,7 @@ class BugFlowOrchestrator:
             
             # Spawn sub-agents for each target
             if len(self.results["targets"]) > 1:
-                from phases.phase1_targets import ProgramResearcher
+                from bugflow.phases.phase1_targets import ProgramResearcher
                 logger.info(f"\n  Spawning target research sub-agents...")
                 for t in self.results["targets"][:3]:
                     researcher = ProgramResearcher(t)
@@ -91,7 +87,7 @@ class BugFlowOrchestrator:
         
         # Phase 2: Reconnaissance
         if self.config.get("recon", {}).get("enabled", True):
-            from phases.phase2_recon import ReconEngine
+            from bugflow.phases.phase2_recon import ReconEngine
             logger.info("\n" + "=" * 60)
             logger.info("PHASE 2/5: Reconnaissance (Haddix-style)")
             logger.info("=" * 60)
@@ -106,7 +102,7 @@ class BugFlowOrchestrator:
         
         # Phase 3: Vulnerability Scanning
         if self.config.get("scanning", {}).get("enabled", True):
-            from phases.phase3_scanning import ScanningEngine
+            from bugflow.phases.phase3_scanning import ScanningEngine
             logger.info("\n" + "=" * 60)
             logger.info("PHASE 3/5: Vulnerability Scanning")
             logger.info("=" * 60)
@@ -122,7 +118,7 @@ class BugFlowOrchestrator:
         
         # Phase 4: API Testing (InsiderPhD-style)
         if self.config.get("api_testing", {}).get("enabled", True):
-            from phases.phase4_api_testing import APITestingEngine
+            from bugflow.phases.phase4_api_testing import APITestingEngine
             logger.info("\n" + "=" * 60)
             logger.info("PHASE 4/5: API Testing (InsiderPhD-style)")
             logger.info("=" * 60)
@@ -138,7 +134,7 @@ class BugFlowOrchestrator:
         
         # Phase 5: Report Writing
         if self.config.get("reporting", {}).get("enabled", True):
-            from phases.phase5_report import ReportWriter
+            from bugflow.phases.phase5_report import ReportWriter
             logger.info("\n" + "=" * 60)
             logger.info("PHASE 5/5: Report Writing (Hermes-powered)")
             logger.info("=" * 60)
@@ -169,11 +165,11 @@ class BugFlowOrchestrator:
 
     def run_phase(self, phase_num: int, target: str) -> dict:
         """Run a single phase."""
-        from phases.phase1_targets import TargetSelector
-        from phases.phase2_recon import ReconEngine
-        from phases.phase3_scanning import ScanningEngine
-        from phases.phase4_api_testing import APITestingEngine
-        from phases.phase5_report import ReportWriter
+        from bugflow.phases.phase1_targets import TargetSelector
+        from bugflow.phases.phase2_recon import ReconEngine
+        from bugflow.phases.phase3_scanning import ScanningEngine
+        from bugflow.phases.phase4_api_testing import APITestingEngine
+        from bugflow.phases.phase5_report import ReportWriter
 
         phases = {
             1: ("Target Selection", lambda: TargetSelector(self.config).run(target)),
