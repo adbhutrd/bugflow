@@ -27,6 +27,6 @@ __version__ = "1.0.0"
 __author__ = "Enish Shah"
 __license__ = "MIT"
 
-from bugflow.bugflow import BugFlowOrchestrator
+from bugflow.orchestrator import BugFlowOrchestrator
 
 __all__ = ["BugFlowOrchestrator", "__version__"]

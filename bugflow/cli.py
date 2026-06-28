@@ -17,7 +17,7 @@ from pathlib import Path
 # Ensure the package root is importable
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from bugflow.bugflow import main
+from bugflow.orchestrator import main
 
 if __name__ == "__main__":
     main()
