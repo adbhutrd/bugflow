@@ -44,13 +44,27 @@ target_selection:
 # Phase 2: Reconnaissance (Haddix-style)
 recon:
   enabled: true
-  # Subdomain discovery sources
+  # Subdomain discovery sources (8 new sources added!)
   sources:
-    - crt.sh
-    - subfinder
-    - amass
-    - wayback
-    - dnsdumpster
+    - crt.sh          # Certificate Transparency logs (free, no key)
+    - amass           # OWASP Amass (installed, running locally)
+    - gau             # GetAllUrls - wayback + OTX + commoncrawl (installed)
+    - alienvault      # AlienVault OTX (free API, no key needed)
+    - urlscan         # URLScan.io (free tier)
+    - hackertarget    # HackerTarget API (free, no key)
+    - github          # GitHub dorking (public repos)
+    - chaos           # ProjectDiscovery Chaos dataset (free)
+    - securitytrails  # SecurityTrails DNS (limited free tier)
+    - dns_common      # Common subdomain wordlist (no deps)
+  # API keys for paid/limited services (leave empty to skip)
+  api_keys:
+    securitytrails: ""
+    urlscan: ""
+    shodan: ""
+    censys_id: ""
+    censys_secret: ""
+    github_token: ""
+    chaos_token: ""
   # Max subdomains to carry forward
   max_subdomains: 500
   # Filter out CDN/WAF subdomains

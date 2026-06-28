@@ -1,35 +1,38 @@
-# BugFlow .gitignore
-# ==================
-
-# Output directory (results, reports, scan data)
-output/
-*.json
-*.txt
-
 # Python
 __pycache__/
 *.py[cod]
 *.egg-info/
 dist/
 build/
+*.egg
 .eggs/
 
-# Environment
-.env
+# Virtual environments
 venv/
 .venv/
+env/
+
+# Output
+output/
+*.log
 
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
-*~
+
+# Secrets
+.env
+*.key
+*.pem
+config.local.yaml
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Temp files
-/tmp/
-*.log
+# Test artifacts
+.coverage
+htmlcov/
+.pytest_cache/
