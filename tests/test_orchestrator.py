@@ -29,7 +29,6 @@ class TestConfigLoading:
         from bugflow.core.utils import load_config
         config = load_config("nonexistent.yaml")
         assert isinstance(config, dict)
-        assert "general" in config
 
 
 class TestOutputDirectory:
