@@ -18,8 +18,8 @@ from typing import Optional
 if __name__ == "__main__" and __package__ is None:
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.humanize import random_delay
-from core.utils import save_results, load_config, get_output_dir
+from bugflow.core.humanize import random_delay
+from bugflow.core.utils import save_results, load_config, get_output_dir
 
 logger = logging.getLogger("bugflow.phase5_report")
 
@@ -274,7 +274,7 @@ class ReportSubAgent:
 
 
 if __name__ == "__main__":
-    from core.utils import setup_logging, print_banner, load_config
+    from bugflow.core.utils import setup_logging, print_banner, load_config
     setup_logging()
     print_banner()
     

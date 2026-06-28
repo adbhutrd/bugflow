@@ -17,8 +17,8 @@ from typing import Optional
 if __name__ == "__main__" and __package__ is None:
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.humanize import random_delay, get_random_headers, get_session, RequestTracker
-from core.utils import save_results, load_config, get_output_dir
+from bugflow.core.humanize import random_delay, get_random_headers, get_session, RequestTracker
+from bugflow.core.utils import save_results, load_config, get_output_dir
 
 logger = logging.getLogger("bugflow.phase4_api_testing")
 
@@ -331,7 +331,7 @@ class APISubAgent:
 
 
 if __name__ == "__main__":
-    from core.utils import setup_logging, print_banner, load_config
+    from bugflow.core.utils import setup_logging, print_banner, load_config
     setup_logging()
     print_banner()
     

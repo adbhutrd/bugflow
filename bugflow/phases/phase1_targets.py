@@ -18,8 +18,8 @@ from typing import Optional
 if __name__ == "__main__" and __package__ is None:
     sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.humanize import random_delay, get_random_headers, get_session
-from core.utils import save_results, load_config, get_output_dir, check_tool
+from bugflow.core.humanize import random_delay, get_random_headers, get_session
+from bugflow.core.utils import save_results, load_config, get_output_dir, check_tool
 
 logger = logging.getLogger("bugflow.phase1_targets")
 
@@ -181,7 +181,7 @@ class ProgramResearcher:
 
 if __name__ == "__main__":
     # Standalone run
-    from core.utils import setup_logging, print_banner
+    from bugflow.core.utils import setup_logging, print_banner
     setup_logging()
     print_banner()
     
