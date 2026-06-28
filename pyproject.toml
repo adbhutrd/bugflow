@@ -66,7 +66,8 @@ Issues = "https://github.com/adbhutrd/bugflow/issues"
 bugflow = "bugflow.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["bugflow*"]
+where = ["."]
+include = ["bugflow", "bugflow.*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
